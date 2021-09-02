@@ -3,6 +3,9 @@ import React, { useState } from 'react';
 const App = () => {
   const [todo, setTodo] = useState([]);
   const [value, setValue] = useState('');
+  
+  const month = new Date().getMonth();
+  const date = new Date().getDate();
 
   const onChangeInput = (e) => {
     setValue(e.target.value);
@@ -54,6 +57,8 @@ const App = () => {
 
   return(
     <div id='container'>
+      <h1 id="title">My Todo List</h1>
+      <h3 id="today">{`오늘은 ${month + 1}월 ${date}일`}</h3>
       <form onSubmit={createPlan}>
         <input type="text" value={value} onChange={onChangeInput} placeholder='할 일을 적어보세요'/>
         <button id="create-btn">등록</button>
@@ -64,7 +69,7 @@ const App = () => {
             <div id='box'>
               { v.done ? <li id='done-list'>{v.key}</li> : <li id='list'>{v.key}</li> }
               <button id='done-btn' onClick={clickDoneBtn(v)}>o</button>
-              <button id='del-btn' onClick={clickDelBtn(v)}>x</button>
+              <button id='del-btn' onClick={clickDelBtn(v)}></button>
             </div>
           )
         })}

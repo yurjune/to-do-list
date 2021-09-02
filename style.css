@@ -1,19 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+
 #container {
   width: 700px; margin: 0 auto;
+  height: 900px;
+  border: 1px solid black;
+  background-color: blanchedalmond;
 }
-
+#title {
+  text-align: center;
+  font-family: 'Gowun Dodum', sans-serif;
+}
+#today {
+  left: 90px;
+  position: relative;
+  font-family: 'Gowun Dodum', sans-serif;
+}
 form {
   text-align: center;
 }
 input {
   font-size: 20px;
+  font-family: 'Gowun Dodum', sans-serif;
   width: 480px; height: 30px;
   text-align: center;
   display: inline-block;
 }
 #create-btn {
+  font-family: 'Gowun Dodum', sans-serif;
   width: 40px; height: 30px;
-  font-size: 12px;
+  font-size: 12px; font-weight: 700;
 }
 
 #box {
@@ -25,13 +40,17 @@ input {
   padding: 0 10px 10px;
   text-decoration: underline;
   text-underline-position: under;
+  font-family: 'Gowun Dodum', sans-serif;
+  font-weight: 700;
 }
 #done-list {
   display: inline-block;
   padding: 0 10px 10px;
   text-decoration: line-through;
-}
-#done-btn {
+  font-family: 'Gowun Dodum', sans-serif;
+  font-weight: 700;
 }
 #del-btn {
+  width: 24px; height: 24px;
+  background: url('./clear.png');
 }
