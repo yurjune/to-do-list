@@ -14,7 +14,7 @@ const App = () => {
       return alert('내용을 입력해주세요!');
     }
     setTodo((prevTodo) => {
-      return [...prevTodo, value];
+      return [...prevTodo, { key: value, done: false }];
     });
     setValue('');
   };
@@ -22,8 +22,8 @@ const App = () => {
   const deletePlan = (v) => {
     setTodo((prevTodo) => {
       const data = [...prevTodo];
-      const delete_target = data.indexOf(v);
-      data.splice(delete_target, 1);
+      const target = data.indexOf(v);
+      data.splice(target, 1);
       return data;
     });
   }
@@ -33,7 +33,23 @@ const App = () => {
     deletePlan(v);
   };
 
-  const clickFinishBtn = (v) => (e) => {
+  const clickDoneBtn = (v) => (e) => {
+    if (!v.done) {
+      setTodo((prevTodo) => {
+        const data = [...prevTodo];
+        const target = data.indexOf(v);
+        data[target].done = true;
+        return data;
+      });
+    } else {
+      setTodo((prevTodo) => {
+        const data = [...prevTodo];
+        const target = data.indexOf(v);
+        data[target].done = false;
+        return data;
+      });
+    }
+    console.log(v.done);
   };
 
   return(
@@ -46,8 +62,8 @@ const App = () => {
         {todo.map((v, i) => {
           return (
             <div id='box'>
-              <li id='list'>{v}</li>
-              <button id='finish-btn' onClick={clickDelBtn(v)}>o</button>
+              { v.done ? <li id='done-list'>{v.key}</li> : <li id='list'>{v.key}</li> }
+              <button id='done-btn' onClick={clickDoneBtn(v)}>o</button>
               <button id='del-btn' onClick={clickDelBtn(v)}>x</button>
             </div>
           )
