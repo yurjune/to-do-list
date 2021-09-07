@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
-
+/*styled css*/
 #container {
   width: 700px; margin: 0 auto;
   height: 900px;
@@ -50,7 +50,7 @@ input {
   font-family: 'Gowun Dodum', sans-serif;
   font-weight: 700;
 }
-#del-btn {
+/* #del-btn {
   width: 24px; height: 24px;
   background: url('./clear.png');
-}
+} */

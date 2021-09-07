@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 
+const setId = () => {
+  return Math.random().toString(36).substring(2);
+}
+
 const App = () => {
-  const [todo, setTodo] = useState([]);
+  const [todos, setTodos] = useState([]);
   const [value, setValue] = useState('');
   
   const month = new Date().getMonth();
@@ -16,44 +20,31 @@ const App = () => {
     if (!value) {
       return alert('내용을 입력해주세요!');
     }
-    setTodo((prevTodo) => {
-      return [...prevTodo, { key: value, done: false }];
+    setTodos((prevTodos) => {
+      return [...prevTodos, { id: setId(), text: value, done: false }];
     });
     setValue('');
   };
 
-  const deletePlan = (v) => {
-    setTodo((prevTodo) => {
-      const data = [...prevTodo];
-      const target = data.indexOf(v);
-      data.splice(target, 1);
-      return data;
+  const deletePlan = (todo) => {
+    setTodos((prevTodos) => {
+      return [...prevTodos].filter((data) => data.id !== todo.id);
     });
   }
 
-  const clickDelBtn = (v) => (e) => {
-    console.log(v);
-    deletePlan(v);
+  const clickDelBtn = (todo) => (e) => {
+    console.log(todo.id);
+    deletePlan(todo);
   };
 
-  const clickDoneBtn = (v) => (e) => {
-    if (!v.done) {
-      setTodo((prevTodo) => {
-        const data = [...prevTodo];
-        const target = data.indexOf(v);
-        data[target].done = true;
-        return data;
-      });
+  const clickDoneBtn = (todo) => (e) => {
+    if (!todo.done) {
+      setTodos((prevTodos) => [...prevTodos].map((data) => data.id === todo.id ? {...todo, done: true} : data));
     } else {
-      setTodo((prevTodo) => {
-        const data = [...prevTodo];
-        const target = data.indexOf(v);
-        data[target].done = false;
-        return data;
-      });
+      setTodos((prevTodos) => [...prevTodos].map((data) => data.id === todo.id ? {...todo, done: false} : data));
     }
-    console.log(v.done);
-  };
+    console.log(todo.id);
+  }
 
   return(
     <div id='container'>
@@ -64,12 +55,12 @@ const App = () => {
         <button id="create-btn">등록</button>
       </form>
       <div>
-        {todo.map((v, i) => {
+        {todos.map((todo) => {
           return (
-            <div id='box'>
-              { v.done ? <li id='done-list'>{v.key}</li> : <li id='list'>{v.key}</li> }
-              <button id='done-btn' onClick={clickDoneBtn(v)}>o</button>
-              <button id='del-btn' onClick={clickDelBtn(v)}></button>
+            <div id='box' key={todo.id}>
+              { todo.done ? <li id='done-list'>{todo.text}</li> : <li id='list'>{todo.text}</li> }
+              <button id='done-btn' onClick={clickDoneBtn(todo)}>o</button>
+              <button id='del-btn' onClick={clickDelBtn(todo)}>x</button>
             </div>
           )
         })}
