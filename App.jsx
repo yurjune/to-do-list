@@ -28,7 +28,7 @@ const App = () => {
 
   const deletePlan = (todo) => {
     setTodos((prevTodos) => {
-      return [...prevTodos].filter((data) => data.id !== todo.id);
+      return prevTodos.filter((data) => data.id !== todo.id);
     });
   }
 
@@ -39,9 +39,9 @@ const App = () => {
 
   const clickDoneBtn = (todo) => (e) => {
     if (!todo.done) {
-      setTodos((prevTodos) => [...prevTodos].map((data) => data.id === todo.id ? {...data, done: true} : data));
+      setTodos((prevTodos) => prevTodos.map((data) => data.id === todo.id ? {...data, done: true} : data));
     } else {
-      setTodos((prevTodos) => [...prevTodos].map((data) => data.id === todo.id ? {...data, done: false} : data));
+      setTodos((prevTodos) => prevTodos.map((data) => data.id === todo.id ? {...data, done: false} : data));
     }
     console.log(todo.id);
   }
